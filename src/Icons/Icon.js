@@ -8,7 +8,6 @@ const Icon = ({children, width, height, ...props}) => {
       className={s.iconDefault}
       width={width}
       height={height}
-      preserveAspectRatio="xMidYMid meet"
       {...props}
       >
       {children}

@@ -4,34 +4,29 @@ const glob = require('glob');
 const cheerio = require('cheerio');
 const esformatter = require('esformatter');
 const rimraf = require('rimraf');
-const _ = require('lodash');
+const forEach = require('lodash.foreach');
+const camelCase = require('lodash.camelcase');
+const optimizeSVG = require('./svg-optimizer');
 esformatter.register(require('esformatter-jsx'));
 
 const rootDir = path.join(__dirname, '..');
 const outputDir = path.join(__dirname, '..', 'components');
 const svgDir = 'raw';
 const components = {};
-const attributesToRemove = [];//['xlink:href', 'clip-path', 'fill-opacity', 'fill'];
-const attributesToRename = {'xlink:href': 'xlinkHref'};
-
-let $;
+const attributesToRename = {'xlink:href': 'xlinkHref', 'class': 'className'};
 
 const cleanPrevious = () => {
   rimraf.sync(outputDir);
   fs.mkdirSync(outputDir);
 };
 
-const cleanAttributes = ($el, $) => {
-  attributesToRemove.forEach(attr => {
-    $el.removeAttr(attr);
-  });
-
-  _.each($el.attr(), (val, name) => {
+const toReactAttributes = ($el, $) => {
+  forEach($el.attr(), (val, name) => {
     if (name.indexOf('-') === -1 && !attributesToRename[name]) {
       return;
     }
 
-    const newName = attributesToRename[name] || _.camelCase(name);
+    const newName = attributesToRename[name] || camelCase(name);
     $el.attr(newName, val).removeAttr(name);
   });
 
@@ -41,18 +36,20 @@ const cleanAttributes = ($el, $) => {
 
   $el.children().each((index, el) => {
     const $child = $(el);
-    cleanAttributes($child, $);
+    toReactAttributes($child, $);
   });
 };
 
-const cleanComments = $el => {
-  $el
-    .contents()
-    .filter(function () {return this.type === 'comment';}) //eslint-disable-line
-    .remove();
-};
+const createReactSVG = (name, svg) => {
+  const $ = cheerio.load(svg, {
+    xmlMode: true
+  });
+  const $svg = $('svg');
+  toReactAttributes($svg, $);
+  const iconSvg = $svg.html();
+  const viewBox = $svg.attr('viewBox');
 
-const getComponentTemplate = (name, viewBox, iconSvg) => {
+
   const uglyComponent = `import React from 'react';
 import Icon from '../Icon';
 
@@ -70,23 +67,21 @@ export default ${name};
   return esformatter.format(uglyComponent);
 };
 
-const createReactComponents = svgPath => {
+const createReactComponents = async svgPath => {
   const name = path.basename(svgPath, '.svg');
-  const svg = fs.readFileSync(svgPath, 'utf-8');
-  $ = cheerio.load(svg, {
-    xmlMode: true
-  });
-  const $svg = $('svg');
-  cleanAttributes($svg, $);
-  cleanComments($svg);
-  const iconSvg = $svg.html();
-  const viewBox = $svg.attr('viewBox');
   const location = path.join('components', name + '.js');
-  components[name] = location;
-  const componentTemplate = getComponentTemplate(name, viewBox, iconSvg);
+  try {
+    svg = fs.readFileSync(svgPath, 'utf-8');
+    svg = await optimizeSVG(svg);
+    const component = createReactSVG(name, svg);
 
-  fs.writeFileSync(path.join(rootDir, location), componentTemplate, 'utf-8');
-  console.log(`created: ${path.join('.', location)}`);
+    components[name] = location;
+
+    fs.writeFileSync(path.join(rootDir, location), component, 'utf-8');
+    console.log(`created: ${path.join('.', location)}`);
+  } catch (err) {
+    console.error(`failed to create svg file for ${name}; Error: ${err}`);
+  }
 };
 
 const createIndexFile = () => {
@@ -98,14 +93,15 @@ const createIndexFile = () => {
   console.log(path.join('.', 'index.js'));
 };
 
-glob(rootDir + `/${svgDir}/**/*.svg`, (err, icons) => {
+glob(rootDir + `/${svgDir}/**/*.svg`, async (err, icons) => {
   if (err) {
     console.error(err);
     return;
   }
 
   cleanPrevious();
-  icons.forEach(createReactComponents);
+  await Promise.all(icons.map(icon => createReactComponents(icon)));
+
   createIndexFile();
 });
 

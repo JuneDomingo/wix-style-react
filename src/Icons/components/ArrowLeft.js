@@ -6,14 +6,7 @@ const ArrowLeft = props => (
   <Icon viewBox="0 0 6 9" {...props}>
     <g>
       <title>Path 2</title>
-      <desc>Created with Sketch.</desc>
-      <defs/>
-      <g id="Page-1" stroke="none" fill="none" strokeWidth="1" fillRule="evenodd">
-        <g id="Desktop-1440px---inner-grid" transform="translate(-178.000000, -80.000000)" stroke="#18D2DE">
-          <polyline id="Path-2" transform="translate(181.060881, 84.299316) rotate(90.000000) translate(-181.060881, -84.299316) " points="176.761565 82.2384355 181.12649 86.3601974 185.360197 82.2384355"
-          />
-        </g>
-      </g>
+      <path d="M5.122 0L1 4.365l4.122 4.234" stroke="#18D2DE" fill="none" fillRule="evenodd" />
     </g>
   </Icon>
 );
