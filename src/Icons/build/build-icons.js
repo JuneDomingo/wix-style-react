@@ -4,13 +4,16 @@ const glob = require('glob');
 const cheerio = require('cheerio');
 const esformatter = require('esformatter');
 const rimraf = require('rimraf');
+const _ = require('lodash');
 esformatter.register(require('esformatter-jsx'));
 
 const rootDir = path.join(__dirname, '..');
 const outputDir = path.join(__dirname, '..', 'components');
 const svgDir = 'raw';
 const components = {};
-const attributesToRemove = ['xlink:href', 'clip-path', 'fill-opacity', 'fill'];
+const attributesToRemove = [];//['xlink:href', 'clip-path', 'fill-opacity', 'fill'];
+const attributesToRename = {'xlink:href': 'xlinkHref'};
+
 let $;
 
 const cleanPrevious = () => {
@@ -21,6 +24,15 @@ const cleanPrevious = () => {
 const cleanAttributes = ($el, $) => {
   attributesToRemove.forEach(attr => {
     $el.removeAttr(attr);
+  });
+
+  _.each($el.attr(), (val, name) => {
+    if (name.indexOf('-') === -1 && !attributesToRename[name]) {
+      return;
+    }
+
+    const newName = attributesToRename[name] || _.camelCase(name);
+    $el.attr(newName, val).removeAttr(name);
   });
 
   if ($el.children().length === 0) {

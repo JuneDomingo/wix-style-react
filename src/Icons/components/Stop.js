@@ -8,8 +8,8 @@ const Stop = props => (
       <title>Terminate</title>
       <desc>Created with Sketch.</desc>
       <defs/>
-      <g id="Page-1" stroke="none" stroke-width="1" fill-rule="evenodd">
-        <g id="Desktop-1440px---inner-grid" transform="translate(-1278.000000, -626.000000)">
+      <g id="Page-1" stroke="none" fill="none" strokeWidth="1" fillRule="evenodd">
+        <g id="Desktop-1440px---inner-grid" transform="translate(-1278.000000, -626.000000)" fill="#1D2D3C">
           <g id="Tooltip" transform="translate(1248.000000, 456.000000)">
             <g id="Terminate" transform="translate(30.000000, 170.000000)">
               <polygon id="Fill-1" points="4.5858 3.8787 3.8788 4.5857 9.4138 10.1217 10.1218 9.4147" />

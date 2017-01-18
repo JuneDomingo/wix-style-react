@@ -8,8 +8,8 @@ const Pause = props => (
       <title>Pause</title>
       <desc>Created with Sketch.</desc>
       <defs/>
-      <g id="Page-1" stroke="none" stroke-width="1" fill-rule="evenodd">
-        <g id="Desktop-1440px---inner-grid" transform="translate(-1278.000000, -594.000000)">
+      <g id="Page-1" stroke="none" fill="none" strokeWidth="1" fillRule="evenodd">
+        <g id="Desktop-1440px---inner-grid" transform="translate(-1278.000000, -594.000000)" fill="#1D2D3C">
           <g id="Tooltip" transform="translate(1248.000000, 456.000000)">
             <g id="Pause" transform="translate(30.000000, 138.000000)">
               <polygon id="Fill-1" points="5 9.5 6 9.5 6 4.5 5 4.5" />
