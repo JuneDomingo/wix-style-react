@@ -1,5 +1,5 @@
 import React from 'react';
-import Slider from 'wix-style-react/Slider';
+import Slider from './ControlledSlider';
 
 const style = {
   padding: '0 5px 55px',
