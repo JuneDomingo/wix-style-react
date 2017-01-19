@@ -7,14 +7,13 @@ import ReactDOM from 'react-dom';
 
 const inputWithOptionsDriverFactory = ({component, wrapper}) => {
 
-  const inputDriver = inputDriverFactory({component, wrapper});
-  const dropdownLayoutDriver = dropdownLayoutDriverFactory({component: component.childNodes[1].childNodes[0], wrapper});
-
   const inputWrapper = component.childNodes[0];
+  const inputDriver = inputDriverFactory({component: inputWrapper.childNodes[0], wrapper: inputWrapper});
+  const dropdownLayoutDriver = dropdownLayoutDriverFactory({component: component.childNodes[1].childNodes[0], wrapper});
 
   const driver = {
     exists: () => !!component,
-    inputWrapper: () => component.childNodes[0],
+    inputWrapper: () => inputWrapper,
     focus: () => ReactTestUtils.Simulate.focus(inputWrapper),
     blur: () => dropdownLayoutDriver.mouseClickOutside(),
     pressDownKey: () => ReactTestUtils.Simulate.keyDown(inputWrapper, {key: 'ArrowDown'}),

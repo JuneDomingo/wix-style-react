@@ -128,6 +128,17 @@ const runInputWithOptionsTest = driverFactory => {
         expect(inputWithOptionsTestkit.dropdownLayoutDriver.exists()).toBeTruthy();
       });
     });
+
+    describe('appearance', () => {
+      it('should be possible to specify the theme of underlying elements', () => {
+        const props = {theme: 'material', dataHook: 'myDataHook'};
+        const wrapper = mount(<InputWithOptions {...props}/>);
+        const testkit = enzymeInputWithOptionsTestkitFactory({wrapper, dataHook: props.dataHook});
+        expect(testkit.inputDriver.isOfStyle(props.theme)).toBe(true);
+        expect(testkit.dropdownLayoutDriver.hasTheme(props.theme)).toBe(true);
+      });
+    });
+
   });
 };
 
