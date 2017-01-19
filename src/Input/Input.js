@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 import Ticker from './Ticker';
 import Unit from './Unit';
+import Group from './Group';
 import InputPrefix from './InputPrefix';
 import InputSuffix from './InputSuffix';
 
@@ -12,6 +13,7 @@ class Input extends Component {
 
   static Ticker = Ticker;
   static Unit = Unit;
+  static Group = Group;
 
   constructor(params) {
     super(params);
