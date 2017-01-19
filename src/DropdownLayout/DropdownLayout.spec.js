@@ -189,4 +189,14 @@ describe('DropdownLayout', () => {
       expect(dropdownLayoutTestkit.optionsLength()).toBe(6);
     });
   });
+
+  describe('theme support', () => {
+    it('should allow setting a custom theme', () => {
+      const props = {dataHook: 'myDataHook', theme: 'material', options};
+      const wrapper = mount(<DropdownLayout {...props}/>);
+      const testkit = enzymeDropdownLayoutTestkitFactory({wrapper, dataHook: props.dataHook});
+      expect(testkit.hasTheme('material')).toBe(true);
+    });
+  });
+
 });

@@ -149,7 +149,7 @@ class DropdownLayout extends WixComponent {
       [styles.shown]: visible,
       [styles.up]: dropDirectionUp,
       [styles.down]: !dropDirectionUp
-    });
+    }, styles[this.props.theme]);
 
     return (
       <div tabIndex={tabIndex} className={styles.wrapper} onKeyDown={this._onKeyDown}>
@@ -245,7 +245,8 @@ DropdownLayout.propTypes = {
     React.PropTypes.string,
     React.PropTypes.number,
   ]),
-  tabIndex: React.PropTypes.number
+  tabIndex: React.PropTypes.number,
+  theme: React.PropTypes.string
 };
 
 DropdownLayout.defaultProps = {

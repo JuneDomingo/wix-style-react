@@ -44,6 +44,7 @@ class InputWithOptions extends WixComponent {
       menuArrow: true,
       ref: input => this.input = input,
       ...inputProps,
+      theme: this.props.theme,
       onChange: this._onChange,
       onFocus: this.showOptions
     });
@@ -56,6 +57,7 @@ class InputWithOptions extends WixComponent {
         <DropdownLayout
           ref={dropdownLayout => this.dropdownLayout = dropdownLayout}
           {...dropdownProps}
+          theme={this.props.theme}
           visible={this.state.showOptions}
           onClose={this.hideOptions}
           onSelect={this._onSelect}

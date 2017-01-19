@@ -144,3 +144,18 @@ $content_container_height: 260px;
 .wrapper * {
   box-sizing:border-box;
 }
+
+.content-container.material {
+  &.up {
+    bottom: 5px;
+  }
+  &.down {
+    top: 5px;
+  }
+  .option {
+    min-height: 36px;
+    line-height: 36px;
+    font-size: 15px;
+    color: $D30;
+  }
+}
