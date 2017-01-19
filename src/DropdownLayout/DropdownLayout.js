@@ -246,16 +246,16 @@ DropdownLayout.propTypes = {
     React.PropTypes.number,
   ]),
   tabIndex: React.PropTypes.number,
-  theme: React.PropTypes.string
+  theme: React.PropTypes.string,
+  onClickOutside: React.PropTypes.func,
+  fixedHeader: React.PropTypes.node,
+  fixedFooter: React.PropTypes.node
 };
 
 DropdownLayout.defaultProps = {
   options: [],
   tabIndex: 1,
-  selectedId: NOT_HOVERED_INDEX,
-  onClickOutside: React.PropTypes.func,
-  fixedHeader: React.PropTypes.node,
-  fixedFooter: React.PropTypes.node
+  selectedId: NOT_HOVERED_INDEX
 };
 
 DropdownLayout.NONE_SELECTED_ID = NOT_HOVERED_INDEX;
