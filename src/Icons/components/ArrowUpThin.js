@@ -6,7 +6,7 @@ const ArrowUpThin = props => (
   <Icon viewBox="0 0 10 6" {...props}>
     <g>
       <title>v</title>
-      <path d="M1 5l4-4 4 4" stroke="#3899EC" fill="none" fillRule="evenodd" />
+      <path d="M1 5l4-4 4 4" stroke="currentColor" fill="none" fillRule="evenodd" />
     </g>
   </Icon>
 );

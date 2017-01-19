@@ -13,7 +13,9 @@ const rootDir = path.join(__dirname, '..');
 const outputDir = path.join(__dirname, '..', 'components');
 const svgDir = 'raw';
 const components = {};
+const resetIfNotNone = val => val === 'none' ? 'none' : 'currentColor';
 const attributesToRename = {'xlink:href': 'xlinkHref', 'class': 'className'};
+const attributesToReplace = {fill: resetIfNotNone, stroke: resetIfNotNone};
 
 const cleanPrevious = () => {
   rimraf.sync(outputDir);
@@ -22,6 +24,10 @@ const cleanPrevious = () => {
 
 const toReactAttributes = ($el, $) => {
   forEach($el.attr(), (val, name) => {
+    if (attributesToReplace[name]) {
+      $el.attr(name, attributesToReplace[name](val));
+    }
+
     if (name.indexOf('-') === -1 && !attributesToRename[name]) {
       return;
     }

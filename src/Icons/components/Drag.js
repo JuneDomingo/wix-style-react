@@ -7,7 +7,7 @@ const Drag = props => (
     <g>
       <title>drag</title>
       <path d="M4 20h2v2H4v-2zm0-5h2v2H4v-2zm0-5h2v2H4v-2zm0-5h2v2H4V5zm0-5h2v2H4V0zM0 20h2v2H0v-2zm0-5h2v2H0v-2zm0-5h2v2H0v-2zm0-5h2v2H0V5zm0-5h2v2H0V0z"
-        fill="#6EB7FD" fillRule="evenodd" />
+        fill="currentColor" fillRule="evenodd" />
     </g>
   </Icon>
 );

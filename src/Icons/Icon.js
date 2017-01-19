@@ -1,13 +1,13 @@
 import React, {PropTypes} from 'react';
 import s from './Icon.scss';
 
-const Icon = ({children, width, height, ...props}) => {
+const Icon = ({children, size, ...props}) => {
 
   return (
     <svg
       className={s.iconDefault}
-      width={width}
-      height={height}
+      width={size}
+      height={size}
       {...props}
       >
       {children}
@@ -15,9 +15,12 @@ const Icon = ({children, width, height, ...props}) => {
   );
 };
 
+Icon.defaultProps = {
+  size: '1em'
+};
+
 Icon.propTypes = {
-  width: PropTypes.string,
-  height: PropTypes.string,
+  size: PropTypes.string,
   children: PropTypes.any
 };
 

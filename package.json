@@ -17,7 +17,8 @@
     "start": "wix-node-build start & npm run storybook",
     "release": "wix-node-build release && gh-pages-auto-release --dist=storybook-static",
     "storybook": "start-storybook -p 6006",
-    "lint": "wix-node-build lint"
+    "lint": "wix-node-build lint",
+    "build-icons": "node --harmony-async-await ./src/Icons/build/build-icons.js"
   },
   "wix": {
     "entry": {

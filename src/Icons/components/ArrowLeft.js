@@ -6,7 +6,7 @@ const ArrowLeft = props => (
   <Icon viewBox="0 0 6 9" {...props}>
     <g>
       <title>Path 2</title>
-      <path d="M5.122 0L1 4.365l4.122 4.234" stroke="#18D2DE" fill="none" fillRule="evenodd" />
+      <path d="M5.122 0L1 4.365l4.122 4.234" stroke="currentColor" fill="none" fillRule="evenodd" />
     </g>
   </Icon>
 );

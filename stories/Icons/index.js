@@ -1,6 +1,8 @@
 import React from 'react';
 import {storiesOf} from '@kadira/storybook';
+import Markdown from '../utils/Components/Markdown';
 import CodeExample from '../utils/Components/CodeExample';
+import Readme from '../../src/Icons/README.md';
 
 import AllIcons from './AllIcons';
 import AllIconsRaw from '!raw!./AllIcons';
@@ -11,7 +13,8 @@ import CustomeIconRaw from '!raw!./CustomIcon';
 storiesOf('6. Common', module)
   .add('6.5 Icons', () => (
     <div>
-      <h1>Icons</h1>
+      <Markdown source={Readme}/>
+
       <CodeExample title="All Icons" code={AllIconsRaw}>
         <AllIcons/>
       </CodeExample>
