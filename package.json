@@ -18,7 +18,7 @@
     "release": "wix-node-build release && gh-pages-auto-release --dist=storybook-static",
     "storybook": "start-storybook -p 6006",
     "lint": "wix-node-build lint",
-    "build-icons": "node --harmony-async-await ./src/Icons/build/build-icons.js"
+    "build-icons": "node ./src/Icons/build/build-icons.js"
   },
   "wix": {
     "entry": {
@@ -51,6 +51,7 @@
     "babel-preset-stage-2": "*",
     "babel-runtime": "^6.6.1",
     "cheerio": "^0.22.0",
+    "co": "^4.6.0",
     "enzyme": "^2.3.0",
     "esformatter": "^0.10.0",
     "esformatter-jsx": "^7.4.1",

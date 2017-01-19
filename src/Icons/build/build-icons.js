@@ -1,4 +1,5 @@
 const fs = require('fs');
+const co = require('co');
 const path = require('path');
 const glob = require('glob');
 const cheerio = require('cheerio');
@@ -73,12 +74,12 @@ export default ${name};
   return esformatter.format(uglyComponent);
 };
 
-const createReactComponents = async svgPath => {
+const createReactComponents = co.wrap(function*(svgPath) {
   const name = path.basename(svgPath, '.svg');
   const location = path.join('components', name + '.js');
   try {
     svg = fs.readFileSync(svgPath, 'utf-8');
-    svg = await optimizeSVG(svg);
+    svg = yield optimizeSVG(svg);
     const component = createReactSVG(name, svg);
 
     components[name] = location;
@@ -88,7 +89,7 @@ const createReactComponents = async svgPath => {
   } catch (err) {
     console.error(`failed to create svg file for ${name}; Error: ${err}`);
   }
-};
+});
 
 const createIndexFile = () => {
   const iconsModule = Object.keys(components).map(name => {
@@ -99,15 +100,15 @@ const createIndexFile = () => {
   console.log(path.join('.', 'index.js'));
 };
 
-glob(rootDir + `/${svgDir}/**/*.svg`, async (err, icons) => {
+glob(rootDir + `/${svgDir}/**/*.svg`, co.wrap(function*(err, icons) {
   if (err) {
     console.error(err);
     return;
   }
 
   cleanPrevious();
-  await Promise.all(icons.map(icon => createReactComponents(icon)));
+  yield Promise.all(icons.map(icon => createReactComponents(icon)));
 
   createIndexFile();
-});
+}));
 
