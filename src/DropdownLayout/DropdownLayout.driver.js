@@ -8,7 +8,7 @@ const dropdownLayoutDriverFactory = ({component, wrapper}) => {
 
   const isClassExists = (component, className) => !!(component.className.match(new RegExp('\\b' + className + '\\b')));
   const contentContainer = component.childNodes[0];
-  const options = component.childNodes[0].childNodes[1];
+  const options = component.querySelector('[data-hook=dropdown-layout-options]');
   const optionAt = position => (options.childNodes[position]);
 
   return {

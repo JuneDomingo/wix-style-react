@@ -155,7 +155,7 @@ class DropdownLayout extends WixComponent {
       <div tabIndex={tabIndex} className={styles.wrapper} onKeyDown={this._onKeyDown}>
         <div className={contentContainerClassName}>
           {this.renderNode(fixedHeader)}
-          <div className={styles.options} ref={options => this.options = options}>
+          <div className={styles.options} ref={options => this.options = options} data-hook="dropdown-layout-options">
             {options.map((option, idx) => (
               option.value === '-' ?
                 (this.renderDivider(idx)) :
