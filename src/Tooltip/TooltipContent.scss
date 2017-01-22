@@ -25,6 +25,7 @@ $shadow: 0 0 11px 0 $shadow-color;
   line-height: $line-height;
   opacity: $opacity;
   box-shadow: $shadow;
+  word-break: break-all;
   -webkit-font-smoothing: antialiased;
   &.light {
     color: $D10;
